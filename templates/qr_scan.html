@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Scanner</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <!-- HTML5 QR CODE LIBRARY -->
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card scanner-card">
+
+        <h1>
+            Scan Farmer QR Code
+        </h1>
+
+        <p class="home-text">
+            Scan the QR code to open farmer profile
+        </p>
+
+        <!-- QR READER -->
+
+        <div id="reader"></div>
+
+        <!-- RESULT -->
+
+        <div id="result"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function onScanSuccess(decodedText, decodedResult){
+
+        // OPEN PROFILE PAGE
+        window.location.href = decodedText;
+
+    }
+
+    function onScanError(error){
+
+        console.log(error);
+
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        {
+            fps:10,
+            qrbox:250
+        }
+    );
+
+    html5QrcodeScanner.render(
+        onScanSuccess,
+        onScanError
+    );
+
+</script>
+
+</body>
+
+</html>

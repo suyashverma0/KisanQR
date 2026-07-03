@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Successful</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card success-card">
+
+        <!-- SUCCESS TITLE -->
+
+        <h1>
+            ✅ Farmer Registered Successfully
+        </h1>
+
+        <p>
+            QR Code generated successfully.  
+            Scan this QR to view farmer profile.
+        </p>
+
+        <!-- QR IMAGE -->
+
+        <img
+            class="qr-image"
+            src="{{ url_for('static', filename='qr_codes/' + farmer.qr_code) }}"
+        >
+
+        <!-- BUTTONS -->
+
+        <div class="success-buttons">
+
+            <a href="{{ url_for('profile', farmer_id=farmer.id) }}">
+                View Profile
+            </a>
+
+            <a
+                href="{{ url_for('static', filename='qr_codes/' + farmer.qr_code) }}"
+                download
+            >
+                Download QR
+            </a>
+
+            <a href="{{ url_for('register') }}">
+                Register Another
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

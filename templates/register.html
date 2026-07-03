@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register Farmer</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="register-title">
+            Farmer Registration
+        </h1>
+
+        <p class="register-subtitle">
+            Fill all farmer details carefully
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- PERSONAL DETAILS -->
+
+            <div class="form-section">
+
+                <h2>Personal Details</h2>
+
+            </div>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="text"
+                name="father_name"
+                placeholder="Father Name"
+            >
+
+            <input
+                type="text"
+                name="mother_name"
+                placeholder="Mother Name"
+            >
+
+            <input
+                type="text"
+                id="mobile"
+                name="mobile"
+                placeholder="Mobile Number"
+            >
+
+            <textarea
+                class="full-width"
+                name="address"
+                placeholder="Address"
+            ></textarea>
+
+            <input
+                type="text"
+                id="aadhaar"
+                name="aadhaar"
+                placeholder="Aadhaar Number"
+            >
+
+            <input
+                type="text"
+                id="pan"
+                name="pan"
+                placeholder="PAN Number"
+            >
+
+            <!-- FARMER IDS -->
+
+            <div class="form-section">
+
+                <h2>Farmer IDs</h2>
+
+            </div>
+
+            <input
+                type="text"
+                name="kisan_id_1"
+                placeholder="Kisan ID 1"
+            >
+
+            <input
+                type="text"
+                name="kisan_id_2"
+                placeholder="Kisan ID 2"
+            >
+
+            <input
+                type="text"
+                name="pm_kisan_id"
+                placeholder="PM Kisan ID"
+            >
+
+            <!-- BANK DETAILS -->
+
+            <div class="form-section">
+
+                <h2>Bank Details</h2>
+
+            </div>
+
+            <input
+                type="text"
+                id="account_number"
+                name="account_number"
+                placeholder="Account Number"
+            >
+
+            <input
+                type="text"
+                id="confirm_account_number"
+                placeholder="Confirm Account Number"
+            >
+
+            <input
+                type="text"
+                name="bank_name"
+                placeholder="Bank Name"
+            >
+
+            <input
+                type="text"
+                name="ifsc_code"
+                placeholder="IFSC Code"
+            >
+
+            <input
+                type="text"
+                name="branch_name"
+                placeholder="Branch Name"
+            >
+
+            <!-- PHOTO -->
+
+            <div class="full-width">
+
+                <input
+                    class="file-input"
+                    type="file"
+                    id="photo"
+                    name="photo"
+                >
+
+                <img
+                    id="preview"
+                    class="preview-image"
+                    src=""
+                >
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit" class="submit-btn">
+                Register Farmer
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

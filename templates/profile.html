@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Profile</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card profile-card">
+
+        <!-- PROFILE PHOTO -->
+
+        <img
+            class="profile-photo"
+            src="{{ url_for('static', filename='uploads/farmer_photos/' + farmer.photo) }}"
+            alt="Farmer Photo"
+        >
+
+        <!-- PROFILE NAME -->
+
+        <h1 class="profile-name">
+            {{ farmer.name }}
+        </h1>
+
+        <p class="profile-subtitle">
+            🌾 Farmer Digital Identity Card
+        </p>
+
+        <!-- PROFILE DETAILS -->
+
+        <div class="profile-info">
+
+            <!-- PERSONAL DETAILS -->
+
+            <div class="profile-box">
+
+                <h3>Father Name</h3>
+
+                <p>{{ farmer.father_name }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Mother Name</h3>
+
+                <p>{{ farmer.mother_name }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Mobile Number</h3>
+
+                <p>{{ farmer.mobile }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Address</h3>
+
+                <p>{{ farmer.address }}</p>
+
+            </div>
+
+            <!-- DOCUMENT DETAILS -->
+
+            <div class="profile-box">
+
+                <h3>Aadhaar Number</h3>
+
+                <p>{{ farmer.aadhaar }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>PAN Number</h3>
+
+                <p>{{ farmer.pan }}</p>
+
+            </div>
+
+            <!-- FARMER IDS -->
+
+            <div class="profile-box">
+
+                <h3>Kisan ID 1</h3>
+
+                <p>{{ farmer.kisan_id_1 }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Kisan ID 2</h3>
+
+                <p>{{ farmer.kisan_id_2 }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>PM Kisan ID</h3>
+
+                <p>{{ farmer.pm_kisan_id }}</p>
+
+            </div>
+
+            <!-- BANK DETAILS -->
+
+            <div class="profile-box">
+
+                <h3>Account Number</h3>
+
+                <p>{{ farmer.account_number }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Bank Name</h3>
+
+                <p>{{ farmer.bank_name }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>IFSC Code</h3>
+
+                <p>{{ farmer.ifsc_code }}</p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <h3>Branch Name</h3>
+
+                <p>{{ farmer.branch_name }}</p>
+
+            </div>
+
+        </div>
+
+        <!-- QR CODE -->
+
+        <img
+            class="qr-image"
+            src="{{ url_for('static', filename='qr_codes/' + farmer.qr_code) }}"
+            alt="QR Code"
+        >
+
+        <!-- BUTTONS -->
+
+        <div class="success-buttons">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{{ url_for('register') }}">
+                Register New Farmer
+            </a>
+
+            <a
+                href="{{ url_for('static', filename='qr_codes/' + farmer.qr_code) }}"
+                download
+            >
+                Download QR
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
