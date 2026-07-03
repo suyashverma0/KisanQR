@@ -529,3 +529,26 @@ textarea{
         width:220px;
     }
 }
+
+.footer{
+    text-align:center;
+    margin-top:50px;
+    padding:20px;
+    color:#d8f5d8;
+    font-size:16px;
+}
+
+.footer p{
+    display:inline-block;
+    padding:12px 25px;
+    background:rgba(255,255,255,0.10);
+    border-radius:14px;
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.15);
+    transition:0.3s;
+}
+
+.footer p:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,13 +17,14 @@
 
 </head>
 
+
 <body>
 
 <div class="container">
 
     <div class="card">
 
-        <!-- TITLE -->
+        <!-- ================= TITLE ================= -->
 
         <h1 class="register-title">
             🌾 Farmer Registration
@@ -32,7 +34,7 @@
             Fill all farmer details carefully
         </p>
 
-        <!-- FORM -->
+        <!-- ================= FORM ================= -->
 
         <form method="POST" enctype="multipart/form-data">
 
@@ -44,60 +46,115 @@
 
             </div>
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Ex: Suyash Verma"
-                required
-            >
+            <!-- FULL NAME -->
 
-            <input
-                type="text"
-                name="father_name"
-                placeholder="Ex: Ramesh Verma"
-                required
-            >
+            <div class="input-group">
 
-            <input
-                type="text"
-                name="mother_name"
-                placeholder="Ex: Sunita Verma"
-                required
-            >
+                <label>Full Name</label>
 
-            <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="Ex: 9876543210"
-                maxlength="10"
-                required
-            >
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Ex: Suyash Verma"
+                    required
+                >
 
-            <textarea
-                class="full-width"
-                name="address"
-                placeholder="Ex: Village Rampur, Delhi"
-                required
-            ></textarea>
+            </div>
 
-            <input
-                type="text"
-                id="aadhaar"
-                name="aadhaar"
-                placeholder="Ex: 123412341234"
-                maxlength="12"
-                required
-            >
+            <!-- FATHER NAME -->
 
-            <input
-                type="text"
-                id="pan"
-                name="pan"
-                placeholder="Ex: ABCDE1234F"
-                maxlength="10"
-                required
-            >
+            <div class="input-group">
+
+                <label>Father Name</label>
+
+                <input
+                    type="text"
+                    name="father_name"
+                    placeholder="Ex: Ramesh Verma"
+                    required
+                >
+
+            </div>
+
+            <!-- MOTHER NAME -->
+
+            <div class="input-group">
+
+                <label>Mother Name</label>
+
+                <input
+                    type="text"
+                    name="mother_name"
+                    placeholder="Ex: Sunita Verma"
+                    required
+                >
+
+            </div>
+
+            <!-- MOBILE -->
+
+            <div class="input-group">
+
+                <label>Mobile Number</label>
+
+                <input
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="Ex: 9876543210"
+                    maxlength="10"
+                    required
+                >
+
+            </div>
+
+            <!-- ADDRESS -->
+
+            <div class="input-group full-width">
+
+                <label>Address</label>
+
+                <textarea
+                    name="address"
+                    placeholder="Ex: Village Rampur, Delhi"
+                    required
+                ></textarea>
+
+            </div>
+
+            <!-- AADHAAR -->
+
+            <div class="input-group">
+
+                <label>Aadhaar Number</label>
+
+                <input
+                    type="text"
+                    id="aadhaar"
+                    name="aadhaar"
+                    placeholder="Ex: 123412341234"
+                    maxlength="12"
+                    required
+                >
+
+            </div>
+
+            <!-- PAN -->
+
+            <div class="input-group">
+
+                <label>PAN Number</label>
+
+                <input
+                    type="text"
+                    id="pan"
+                    name="pan"
+                    placeholder="Ex: ABCDE1234F"
+                    maxlength="10"
+                    required
+                >
+
+            </div>
 
             <!-- ================= FARMER IDS ================= -->
 
@@ -107,26 +164,50 @@
 
             </div>
 
-            <input
-                type="text"
-                name="kisan_id_1"
-                placeholder="Ex: KISAN12345"
-                required
-            >
+            <!-- KISAN ID 1 -->
 
-            <input
-                type="text"
-                name="kisan_id_2"
-                placeholder="Ex: FARM67890"
-                required
-            >
+            <div class="input-group">
 
-            <input
-                type="text"
-                name="pm_kisan_id"
-                placeholder="Ex: PMKISAN4587"
-                required
-            >
+                <label>Kisan ID 1</label>
+
+                <input
+                    type="text"
+                    name="kisan_id_1"
+                    placeholder="Ex: KISAN12345"
+                    required
+                >
+
+            </div>
+
+            <!-- KISAN ID 2 -->
+
+            <div class="input-group">
+
+                <label>Kisan ID 2</label>
+
+                <input
+                    type="text"
+                    name="kisan_id_2"
+                    placeholder="Ex: FARM67890"
+                    required
+                >
+
+            </div>
+
+            <!-- PM KISAN ID -->
+
+            <div class="input-group">
+
+                <label>PM Kisan ID</label>
+
+                <input
+                    type="text"
+                    name="pm_kisan_id"
+                    placeholder="Ex: PMKISAN4587"
+                    required
+                >
+
+            </div>
 
             <!-- ================= BANK DETAILS ================= -->
 
@@ -136,43 +217,83 @@
 
             </div>
 
-            <input
-                type="text"
-                id="account_number"
-                name="account_number"
-                placeholder="Ex: 458796321478"
-                required
-            >
+            <!-- ACCOUNT NUMBER -->
 
-            <input
-                type="text"
-                id="confirm_account_number"
-                placeholder="Confirm Account Number"
-                required
-            >
+            <div class="input-group">
 
-            <input
-                type="text"
-                name="bank_name"
-                placeholder="Ex: State Bank of India"
-                required
-            >
+                <label>Account Number</label>
 
-            <input
-                type="text"
-                name="ifsc_code"
-                placeholder="Ex: SBIN0004587"
-                required
-            >
+                <input
+                    type="text"
+                    id="account_number"
+                    name="account_number"
+                    placeholder="Ex: 458796321478"
+                    required
+                >
 
-            <input
-                type="text"
-                name="branch_name"
-                placeholder="Ex: Delhi Main Branch"
-                required
-            >
+            </div>
 
-            <!-- ================= PHOTO SECTION ================= -->
+            <!-- CONFIRM ACCOUNT -->
+
+            <div class="input-group">
+
+                <label>Confirm Account Number</label>
+
+                <input
+                    type="text"
+                    id="confirm_account_number"
+                    placeholder="Re-enter Account Number"
+                    required
+                >
+
+            </div>
+
+            <!-- BANK NAME -->
+
+            <div class="input-group">
+
+                <label>Bank Name</label>
+
+                <input
+                    type="text"
+                    name="bank_name"
+                    placeholder="Ex: State Bank of India"
+                    required
+                >
+
+            </div>
+
+            <!-- IFSC -->
+
+            <div class="input-group">
+
+                <label>IFSC Code</label>
+
+                <input
+                    type="text"
+                    name="ifsc_code"
+                    placeholder="Ex: SBIN0004587"
+                    required
+                >
+
+            </div>
+
+            <!-- BRANCH -->
+
+            <div class="input-group">
+
+                <label>Branch Name</label>
+
+                <input
+                    type="text"
+                    name="branch_name"
+                    placeholder="Ex: Delhi Main Branch"
+                    required
+                >
+
+            </div>
+
+            <!-- ================= PHOTO UPLOAD ================= -->
 
             <div class="upload-box full-width">
 
@@ -183,7 +304,7 @@
                         <h3>📸 Upload Farmer Photo</h3>
 
                         <p>
-                            JPG, JPEG or PNG only • Max Size 2MB
+                            JPG, JPEG, PNG only • Max Size 2MB
                         </p>
 
                     </div>
@@ -208,7 +329,7 @@
 
             </div>
 
-            <!-- ================= SUBMIT BUTTON ================= -->
+            <!-- ================= BUTTON ================= -->
 
             <button
                 type="submit"
@@ -224,7 +345,17 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+ <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            🌾 Built by Suyash
+        </p>
+
+    </footer>
 
 </body>
 
 </html>
+
