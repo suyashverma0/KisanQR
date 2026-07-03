@@ -22,100 +22,117 @@
 
     <div class="card">
 
+        <!-- TITLE -->
+
         <h1 class="register-title">
-            Farmer Registration
+            🌾 Farmer Registration
         </h1>
 
         <p class="register-subtitle">
             Fill all farmer details carefully
         </p>
 
+        <!-- FORM -->
+
         <form method="POST" enctype="multipart/form-data">
 
-            <!-- PERSONAL DETAILS -->
+            <!-- ================= PERSONAL DETAILS ================= -->
 
             <div class="form-section">
 
-                <h2>Personal Details</h2>
+                <h2>🌾 Personal Details</h2>
 
             </div>
 
             <input
                 type="text"
                 name="name"
-                placeholder="Full Name"
+                placeholder="Ex: Suyash Verma"
+                required
             >
 
             <input
                 type="text"
                 name="father_name"
-                placeholder="Father Name"
+                placeholder="Ex: Ramesh Verma"
+                required
             >
 
             <input
                 type="text"
                 name="mother_name"
-                placeholder="Mother Name"
+                placeholder="Ex: Sunita Verma"
+                required
             >
 
             <input
                 type="text"
                 id="mobile"
                 name="mobile"
-                placeholder="Mobile Number"
+                placeholder="Ex: 9876543210"
+                maxlength="10"
+                required
             >
 
             <textarea
                 class="full-width"
                 name="address"
-                placeholder="Address"
+                placeholder="Ex: Village Rampur, Delhi"
+                required
             ></textarea>
 
             <input
                 type="text"
                 id="aadhaar"
                 name="aadhaar"
-                placeholder="Aadhaar Number"
+                placeholder="Ex: 123412341234"
+                maxlength="12"
+                required
             >
 
             <input
                 type="text"
                 id="pan"
                 name="pan"
-                placeholder="PAN Number"
+                placeholder="Ex: ABCDE1234F"
+                maxlength="10"
+                required
             >
 
-            <!-- FARMER IDS -->
+            <!-- ================= FARMER IDS ================= -->
 
             <div class="form-section">
 
-                <h2>Farmer IDs</h2>
+                <h2>🧾 Farmer IDs</h2>
 
             </div>
 
             <input
                 type="text"
                 name="kisan_id_1"
-                placeholder="Kisan ID 1"
+                placeholder="Ex: KISAN12345"
+                required
             >
 
             <input
                 type="text"
                 name="kisan_id_2"
-                placeholder="Kisan ID 2"
+                placeholder="Ex: FARM67890"
+                required
             >
 
             <input
                 type="text"
                 name="pm_kisan_id"
-                placeholder="PM Kisan ID"
+                placeholder="Ex: PMKISAN4587"
+                required
             >
 
-            <!-- BANK DETAILS -->
+            <!-- ================= BANK DETAILS ================= -->
 
             <div class="form-section">
 
-                <h2>Bank Details</h2>
+                <h2>🏦 Bank Details</h2>
 
             </div>
 
@@ -123,56 +140,81 @@
                 type="text"
                 id="account_number"
                 name="account_number"
-                placeholder="Account Number"
+                placeholder="Ex: 458796321478"
+                required
             >
 
             <input
                 type="text"
                 id="confirm_account_number"
                 placeholder="Confirm Account Number"
+                required
             >
 
             <input
                 type="text"
                 name="bank_name"
-                placeholder="Bank Name"
+                placeholder="Ex: State Bank of India"
+                required
             >
 
             <input
                 type="text"
                 name="ifsc_code"
-                placeholder="IFSC Code"
+                placeholder="Ex: SBIN0004587"
+                required
             >
 
             <input
                 type="text"
                 name="branch_name"
-                placeholder="Branch Name"
+                placeholder="Ex: Delhi Main Branch"
+                required
             >
 
-            <!-- PHOTO -->
+            <!-- ================= PHOTO SECTION ================= -->
 
-            <div class="full-width">
+            <div class="upload-box full-width">
+
+                <label for="photo" class="upload-label">
+
+                    <div class="upload-content">
+
+                        <h3>📸 Upload Farmer Photo</h3>
+
+                        <p>
+                            JPG, JPEG or PNG only • Max Size 2MB
+                        </p>
+
+                    </div>
+
+                </label>
 
                 <input
                     class="file-input"
                     type="file"
                     id="photo"
                     name="photo"
+                    accept=".jpg,.jpeg,.png"
+                    required
                 >
 
                 <img
                     id="preview"
                     class="preview-image"
                     src=""
+                    alt="Preview"
                 >
 
             </div>
 
-            <!-- BUTTON -->
+            <!-- ================= SUBMIT BUTTON ================= -->
 
-            <button type="submit" class="submit-btn">
-                Register Farmer
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                🌱 Register Farmer
             </button>
 
         </form>
