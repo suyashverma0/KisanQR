@@ -1,81 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
+{% block title %}Scan QR Code{% endblock %}
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>QR Scanner</title>
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
-    >
-
-    <!-- HTML5 QR CODE LIBRARY -->
-
-    <script src="https://unpkg.com/html5-qrcode"></script>
-
-</head>
-
-<body>
-
-<div class="container">
+{% block content %}
 
     <div class="card scanner-card">
 
-        <h1>
-            Scan Farmer QR Code
-        </h1>
-
-        <p class="home-text">
-            Scan the QR code to open farmer profile
-        </p>
-
-        <!-- QR READER -->
+        <h1>Scan Farmer QR Code</h1>
+        <p class="home-text">Point your camera at a farmer's QR code to open their profile</p>
 
         <div id="reader"></div>
 
-        <!-- RESULT -->
-
         <div id="result"></div>
+
+        <p class="scanner-hint">Having camera trouble? Make sure you've allowed camera access in your browser.</p>
 
     </div>
 
-</div>
+{% endblock %}
 
+{% block extra_head %}
+<script src="https://unpkg.com/html5-qrcode"></script>
+{% endblock %}
+
+{% block extra_scripts %}
 <script>
-
-    function onScanSuccess(decodedText, decodedResult){
-
-        // OPEN PROFILE PAGE
-        window.location.href = decodedText;
-
-    }
-
-    function onScanError(error){
-
-        console.log(error);
-
-    }
-
-    let html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-        {
-            fps:10,
-            qrbox:250
+    function onScanSuccess(decodedText) {
+        try {
+            const url = new URL(decodedText);
+            window.location.href = url.href;
+        } catch (err) {
+            document.getElementById("result").textContent =
+                "Scanned content isn't a valid profile link.";
         }
-    );
+    }
 
-    html5QrcodeScanner.render(
-        onScanSuccess,
-        onScanError
-    );
+    function onScanError(error) {
+        // Expected frequently while searching for a code; no need to surface to the user.
+    }
 
+    const html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+        fps: 10,
+        qrbox: 250,
+    });
+
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
 </script>
-
-</body>
-
-</html>
+{% endblock %}

@@ -1,45 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
+{% block title %}Farmer QR System{% endblock %}
 
-    <meta charset="UTF-8">
+{% block content %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="card home-card">
 
-    <title>Farmer QR System</title>
+        <div class="home-icon">🌾</div>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
-    >
+        <h1 class="home-title">Farmer QR Verification System</h1>
 
-</head>
+        <p class="home-text">
+            Register farmer details and generate a QR-based digital identity card
+            that can be scanned anywhere for instant verification.
+        </p>
 
-<body>
-
-    <div class="container">
-
-        <div class="card">
-
-            <h1>🌾 Farmer QR Verification System</h1>
-
-            <p class="home-text">
-                Register farmer details and generate QR based digital profile.
-            </p>
-
-            <div class="home-buttons">
-
-                <a href="{{ url_for('register') }}">
-                    Register Farmer
-                </a>
-
+        {% if farmer_count %}
+            <div class="stat-pill">
+                {{ farmer_count }} farmer{{ 's' if farmer_count != 1 else '' }} registered so far
             </div>
+        {% endif %}
+
+        <div class="home-buttons">
+
+            <a href="{{ url_for('register') }}" class="btn btn-primary">
+                📝 Register Farmer
+            </a>
+
+            <a href="{{ url_for('scan') }}" class="btn btn-outline">
+                📷 Scan QR Code
+            </a>
+
+            <a href="{{ url_for('farmers') }}" class="btn btn-outline">
+                📋 View Farmers
+            </a>
 
         </div>
 
     </div>
 
-</body>
+    <div class="feature-grid">
 
-</html>
+        <div class="feature-box">
+            <div class="feature-icon">🪪</div>
+            <h3>Digital Identity</h3>
+            <p>Every farmer gets a QR-linked digital profile card that's easy to verify in the field.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">🔒</div>
+            <h3>Privacy First</h3>
+            <p>Sensitive details like Aadhaar, PAN, and bank account numbers are masked on public profiles.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Scanning</h3>
+            <p>Scan any farmer's QR code with your camera to pull up their profile in seconds.</p>
+        </div>
+
+    </div>
+
+{% endblock %}

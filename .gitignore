@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+database.db
+instance/
+static/uploads/farmer_photos/*
+!static/uploads/farmer_photos/.gitkeep
+static/qr_codes/*
+!static/qr_codes/.gitkeep
+.env

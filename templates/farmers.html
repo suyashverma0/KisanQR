@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Registered Farmers{% endblock %}
+
+{% block content %}
+
+    <div class="card">
+
+        <h1 class="register-title">📋 Registered Farmers</h1>
+        <p class="register-subtitle">Search and browse registered farmer profiles</p>
+
+        <form method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Search by name, mobile, or Kisan ID..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        {% if farmers %}
+            <div class="farmer-grid">
+                {% for farmer in farmers %}
+                    <a href="{{ url_for('profile', farmer_id=farmer.id) }}" class="farmer-tile">
+                        <img src="{{ url_for('static', filename='uploads/farmer_photos/' + farmer.photo) }}" alt="{{ farmer.name }}">
+                        <div>
+                            <h3>{{ farmer.name }}</h3>
+                            <p>{{ farmer.mobile }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>🌱 No farmers found{% if query %} for "{{ query }}"{% endif %}.</p>
+                <a href="{{ url_for('register') }}" class="btn btn-primary">Register the first farmer</a>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

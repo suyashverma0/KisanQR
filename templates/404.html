@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block content %}
+
+    <div class="card success-card">
+        <div class="success-icon">🌾</div>
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for doesn't exist, or the farmer profile may have been removed.</p>
+        <div class="success-buttons">
+            <a href="{{ url_for('home') }}" class="btn btn-primary">🏠 Back Home</a>
+        </div>
+    </div>
+
+{% endblock %}
