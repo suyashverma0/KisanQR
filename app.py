@@ -31,6 +31,10 @@ app.config["QR_FOLDER"] = QR_FOLDER
 
 db.init_app(app)
 
+
+with app.app_context():
+    db.create_all()
+
 # Make sure the folders we save into always exist.
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(QR_FOLDER, exist_ok=True)
@@ -154,9 +158,9 @@ def farmers():
 
 
 # ================= MAIN =================
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
+with app.app_context():
+    db.create_all()
 
+if __name__ == "__main__":
     debug_mode = os.environ.get("FLASK_DEBUG", "1") == "1"
     app.run(debug=debug_mode)
