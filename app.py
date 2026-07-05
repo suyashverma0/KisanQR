@@ -1,23 +1,60 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os
+import json
+import qrcode
+
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for
+)
+
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-import os
-import qrcode
+
+# ================= APP CONFIG =================
 
 app = Flask(__name__)
 
-# ================= CONFIG =================
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+UPLOAD_FOLDER = os.path.join(
+    BASE_DIR,
+    'static',
+    'uploads',
+    'farmer_photos'
+)
+
+QR_FOLDER = os.path.join(
+    BASE_DIR,
+    'static',
+    'qr_codes'
+)
+
+# CREATE FOLDERS AUTOMATICALLY
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(QR_FOLDER, exist_ok=True)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///farmers.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
 # ================= DATABASE MODEL =================
+
 class Farmer(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(100))
+
     father_name = db.Column(db.String(100))
+
     mother_name = db.Column(db.String(100))
 
     address = db.Column(db.Text)
@@ -25,116 +62,189 @@ class Farmer(db.Model):
     mobile = db.Column(db.String(15))
 
     aadhaar = db.Column(db.String(20))
+
     pan = db.Column(db.String(20))
 
-    kisan_id_1 = db.Column(db.String(100))
-    kisan_id_2 = db.Column(db.String(100))
+    kisan_id_1 = db.Column(db.String(50))
 
-    pm_kisan_id = db.Column(db.String(100))
+    kisan_id_2 = db.Column(db.String(50))
 
-    account_number = db.Column(db.String(50))
+    pm_kisan_id = db.Column(db.String(50))
+
+    account_number = db.Column(db.String(30))
+
     bank_name = db.Column(db.String(100))
+
     ifsc_code = db.Column(db.String(20))
+
     branch_name = db.Column(db.String(100))
 
     photo = db.Column(db.String(200))
+
     qr_code = db.Column(db.String(200))
 
+# CREATE DATABASE
 
-# ================= HOME =================
+with app.app_context():
+    db.create_all()
+
+# ================= HOME PAGE =================
+
 @app.route('/')
+
 def home():
+
     return render_template('index.html')
 
+# ================= REGISTER PAGE =================
 
-# ================= REGISTER =================
 @app.route('/register', methods=['GET', 'POST'])
+
 def register():
 
     if request.method == 'POST':
 
-        # ===== GET FORM DATA =====
-        name = request.form['name']
-        father_name = request.form['father_name']
-        mother_name = request.form['mother_name']
+        try:
 
-        address = request.form['address']
+            # ================= GET FORM DATA =================
 
-        mobile = request.form['mobile']
+            name = request.form.get('name')
 
-        aadhaar = request.form['aadhaar']
-        pan = request.form['pan']
+            father_name = request.form.get('father_name')
 
-        kisan_id_1 = request.form['kisan_id_1']
-        kisan_id_2 = request.form['kisan_id_2']
+            mother_name = request.form.get('mother_name')
 
-        pm_kisan_id = request.form['pm_kisan_id']
+            address = request.form.get('address')
 
-        account_number = request.form['account_number']
-        bank_name = request.form['bank_name']
-        ifsc_code = request.form['ifsc_code']
-        branch_name = request.form['branch_name']
+            mobile = request.form.get('mobile')
 
-        # ===== PHOTO UPLOAD =====
-        photo_file = request.files['photo']
+            aadhaar = request.form.get('aadhaar')
 
-        filename = secure_filename(photo_file.filename)
+            pan = request.form.get('pan')
 
-        upload_path = os.path.join(
-            'static/uploads/farmer_photos',
-            filename
-        )
+            kisan_id_1 = request.form.get('kisan_id_1')
 
-        photo_file.save(upload_path)
+            kisan_id_2 = request.form.get('kisan_id_2')
 
-        # ===== SAVE TO DATABASE =====
-        farmer = Farmer(
-            name=name,
-            father_name=father_name,
-            mother_name=mother_name,
-            address=address,
-            mobile=mobile,
-            aadhaar=aadhaar,
-            pan=pan,
-            kisan_id_1=kisan_id_1,
-            kisan_id_2=kisan_id_2,
-            pm_kisan_id=pm_kisan_id,
-            account_number=account_number,
-            bank_name=bank_name,
-            ifsc_code=ifsc_code,
-            branch_name=branch_name,
-            photo=filename
-        )
+            pm_kisan_id = request.form.get('pm_kisan_id')
 
-        db.session.add(farmer)
-        db.session.commit()
+            account_number = request.form.get('account_number')
 
-        # ===== QR GENERATE =====
-        profile_url = f"http://127.0.0.1:5000/profile/{farmer.id}"
+            bank_name = request.form.get('bank_name')
 
-        qr = qrcode.make(profile_url)
+            ifsc_code = request.form.get('ifsc_code')
 
-        qr_filename = f"farmer_{farmer.id}.png"
+            branch_name = request.form.get('branch_name')
 
-        qr_path = os.path.join(
-            'static/qr_codes',
-            qr_filename
-        )
+            # ================= PHOTO UPLOAD =================
 
-        qr.save(qr_path)
+            photo = request.files.get('photo')
 
-        # SAVE QR NAME
-        farmer.qr_code = qr_filename
+            photo_filename = ""
 
-        db.session.commit()
+            if photo and photo.filename != "":
 
-        return redirect(url_for('success', farmer_id=farmer.id))
+                filename = secure_filename(photo.filename)
+
+                photo_path = os.path.join(
+                    UPLOAD_FOLDER,
+                    filename
+                )
+
+                photo.save(photo_path)
+
+                photo_filename = filename
+
+            # ================= SAVE FARMER =================
+
+            farmer = Farmer(
+
+                name=name,
+
+                father_name=father_name,
+
+                mother_name=mother_name,
+
+                address=address,
+
+                mobile=mobile,
+
+                aadhaar=aadhaar,
+
+                pan=pan,
+
+                kisan_id_1=kisan_id_1,
+
+                kisan_id_2=kisan_id_2,
+
+                pm_kisan_id=pm_kisan_id,
+
+                account_number=account_number,
+
+                bank_name=bank_name,
+
+                ifsc_code=ifsc_code,
+
+                branch_name=branch_name,
+
+                photo=photo_filename
+            )
+
+            db.session.add(farmer)
+
+            db.session.commit()
+
+            # ================= QR DATA =================
+
+            qr_data = {
+
+                "id": farmer.id,
+
+                "name": farmer.name,
+
+                "father_name": farmer.father_name,
+
+                "mobile": farmer.mobile,
+
+                "address": farmer.address
+            }
+
+            # ================= GENERATE QR =================
+
+            qr = qrcode.make(json.dumps(qr_data))
+
+            qr_filename = f"farmer_{farmer.id}.png"
+
+            qr_path = os.path.join(
+                QR_FOLDER,
+                qr_filename
+            )
+
+            qr.save(qr_path)
+
+            # ================= SAVE QR IN DATABASE =================
+
+            farmer.qr_code = qr_filename
+
+            db.session.commit()
+
+            return redirect(
+                url_for(
+                    'success',
+                    farmer_id=farmer.id
+                )
+            )
+
+        except Exception as e:
+
+            return f"ERROR: {str(e)}"
 
     return render_template('register.html')
 
-
 # ================= SUCCESS PAGE =================
+
 @app.route('/success/<int:farmer_id>')
+
 def success(farmer_id):
 
     farmer = Farmer.query.get_or_404(farmer_id)
@@ -144,9 +254,10 @@ def success(farmer_id):
         farmer=farmer
     )
 
-
 # ================= PROFILE PAGE =================
+
 @app.route('/profile/<int:farmer_id>')
+
 def profile(farmer_id):
 
     farmer = Farmer.query.get_or_404(farmer_id)
@@ -156,11 +267,12 @@ def profile(farmer_id):
         farmer=farmer
     )
 
+# ================= RUN APP =================
+if __name__ == "__main__":
 
-# ================= MAIN =================
-if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
 
-    with app.app_context():
-        db.create_all()
-
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
