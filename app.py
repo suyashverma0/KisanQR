@@ -4,15 +4,7 @@ from flask import Flask, flash, redirect, render_template, request, url_for
 from werkzeug.exceptions import RequestEntityTooLarge
 
 from models import Farmer, db
-from utils import (
-    allowed_file,
-    generate_qr,
-    mask_aadhaar,
-    mask_account_number,
-    mask_pan,
-    save_photo,
-    validate_farmer_form,
-)
+from utils import allowed_file, generate_qr, save_photo, validate_farmer_form
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,10 +22,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["QR_FOLDER"] = QR_FOLDER
 
 db.init_app(app)
-
-
-with app.app_context():
-    db.create_all()
 
 # Make sure the folders we save into always exist.
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -123,13 +111,7 @@ def success(farmer_id):
 @app.route("/profile/<int:farmer_id>")
 def profile(farmer_id):
     farmer = Farmer.query.get_or_404(farmer_id)
-    return render_template(
-        "profile.html",
-        farmer=farmer,
-        masked_aadhaar=mask_aadhaar(farmer.aadhaar),
-        masked_pan=mask_pan(farmer.pan),
-        masked_account=mask_account_number(farmer.account_number),
-    )
+    return render_template("profile.html", farmer=farmer)
 
 
 # ================= QR SCANNER =================
@@ -158,9 +140,9 @@ def farmers():
 
 
 # ================= MAIN =================
-with app.app_context():
-    db.create_all()
-
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+
     debug_mode = os.environ.get("FLASK_DEBUG", "1") == "1"
     app.run(debug=debug_mode)

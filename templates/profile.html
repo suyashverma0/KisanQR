@@ -14,10 +14,6 @@
 
         <p class="profile-subtitle">🌾 Farmer Digital Identity Card</p>
 
-        <div class="privacy-note">
-            🔒 Sensitive identity and bank details are partially masked to protect this farmer's privacy.
-        </div>
-
         <div class="profile-info">
 
             <div class="profile-box">
@@ -42,12 +38,12 @@
 
             <div class="profile-box">
                 <h3>Aadhaar Number</h3>
-                <p>{{ masked_aadhaar }}</p>
+                <p>{{ farmer.aadhaar }}</p>
             </div>
 
             <div class="profile-box">
                 <h3>PAN Number</h3>
-                <p>{{ masked_pan }}</p>
+                <p>{{ farmer.pan }}</p>
             </div>
 
             <div class="profile-box">
@@ -67,7 +63,7 @@
 
             <div class="profile-box">
                 <h3>Account Number</h3>
-                <p>{{ masked_account }}</p>
+                <p>{{ farmer.account_number }}</p>
             </div>
 
             <div class="profile-box">
